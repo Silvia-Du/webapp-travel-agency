@@ -6,12 +6,6 @@ namespace webapp_travel_agency.Controllers
 {
     public class GuestController : Controller
     {
-        private readonly ILogger<GuestController> _logger;
-
-        public GuestController(ILogger<GuestController> logger)
-        {
-            _logger = logger;
-        }
 
         public IActionResult Index()
         {

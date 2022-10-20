@@ -22,6 +22,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Guest}/{action=Index}/{id?}");
+    pattern: "{controller=Trip}/{action=Create}/{id?}");
 
 app.Run();
