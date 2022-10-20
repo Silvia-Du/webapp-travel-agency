@@ -1,0 +1,117 @@
+﻿@{
+    ViewData["Title"] = "Update Page";
+}
+@model Utility
+
+<div class="container bg-beige debug p-4">
+    <form asp-controller="Trip" asp-action="Update" asp-route-id="@Model.Trip.Id" method="post">
+        @Html.AntiForgeryToken()
+
+        <div class="mb-3">
+            <strong>Titolo viaggio:</strong>
+            <input asp-for="Trip.Title" class="d-block w-100" />
+            <span asp-validation-for="Trip.Title" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <strong>Descrizione:</strong>
+            <textarea class="form-control" asp-for="Trip.Description"></textarea>
+            <span asp-validation-for="Trip.Description" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <strong>Immagine:</strong>
+            <input asp-for="Trip.Image" class="d-block w-100" />
+            <span asp-validation-for="Trip.Image" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <strong>Data partenza:</strong>
+            <input asp-for="Trip.StartDate" class="d-block w-100" />
+            <span asp-validation-for="Trip.StartDate" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <strong>Data fine:</strong>
+            <input asp-for="Trip.EndDate" class="d-block w-100" />
+            <span asp-validation-for="Trip.EndDate" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <strong>Durata in giorni:</strong>
+            <input asp-for="Trip.DaysNum" class="d-block w-100" min="1"/>
+            <span asp-validation-for="Trip.DaysNum" class="text-danger"></span>
+        </div>
+
+
+
+        <div class="mb-3">
+            <strong>Prezzo:</strong>
+            <input asp-for="Trip.Price" class="d-block w-100" step=".50" value="@Model.Trip.Price.ToString("###.##")" min="0"/>
+            <span asp-validation-for="Trip.Price" class="text-danger"></span>
+        </div>
+        @*cat*@
+         <div class="mb-3">
+            <strong>Categoria:</strong>
+            <select class="form-select" asp-for="Trip.CategoryId">
+                <option value="">Seleziona la categoria</option>
+                @foreach (Category category in Model.Categories)
+                {
+                    if (Model.Trip.CategoryId == category.Id)
+                    {
+                        <option value="@category.Id" selected>@category.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                }
+            </select>
+            <span asp-validation-for="Trip.CategoryId" class="text-danger"></span>
+        </div>
+
+        @*dest*@
+        <div class="mb-3">
+            <strong>Destinazione:</strong>
+            <select class="form-select" asp-for="Trip.DestinationId">
+                <option value="">Seleziona una destinazione</option>
+                @foreach (Destination destination in Model.Destinations)
+                {
+                    if (Model.Trip.DestinationId == destination.Id)
+                    {
+                        <option value="@destination.Id" selected>@destination.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@destination.Id">@destination.Name</option>
+                    }
+                }
+            </select>
+            <span asp-validation-for="Trip.DestinationId" class="text-danger"></span>
+        </div> 
+
+        @*Range*@
+        <div class="mb-3">
+            <strong>Range d'età:</strong>
+            <select class="form-select" asp-for="Trip.AgeRangeId">
+                <option value="">Seleziona il range d'età:</option>
+                @foreach (AgeRange range in Model.Ranges)
+                {
+                    if (Model.Trip.AgeRangeId == range.Id)
+                    {
+                        <option value="@range.Id" selected>@range.Range</option>
+                    }
+                    else
+                    {
+                        <option value="@range.Id">@range.Range</option>
+                    }
+                }
+            </select>
+            <span asp-validation-for="Trip.DestinationId" class="text-danger"></span>
+        </div>
+
+        <div class="text-end">
+            <input type="submit" class="btn btn-small  btn-secondary" value="Salva">
+        </div>
+
+    </form>
+</div>

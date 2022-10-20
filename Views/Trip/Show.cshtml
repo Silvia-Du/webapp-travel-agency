@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Show Page";
+}
+@model Trip
+
+<div class="container debug">
+    <div class="row">
+        <div class="col-6">
+            <img src="@Model.Image" />
+        </div>
+        <div class="col-6 p-2">
+            <h2 class="mb-3">@Model.Title</h2>
+                 <p>@Model.Title</p>
+                 <p>@Model.Category?.Name</p>
+                 <p>@Model.Description</p>
+                 <p>Euro: @Model.Price.ToString("###.##"); </p>
+
+                 <a class="btn_show px-3 py-2 rounded-pill" href="@Url.Action("Update", "Trip", new{Id = Model.Id})">Modifica</a>
+                 <a class="btn_show px-3 py-2 rounded-pill" asp-area="" asp-controller="Trip" asp-action="Index">Lista Viaggi</a>
+        </div>
+    </div>
+</div>
+

@@ -3,7 +3,65 @@
 }
 @model List<Trip>
 
-eccoci
-<img src="/img/tasmania.png" />
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1 class="mt-3 mb-3">Lista viaggi</h1>
+                <a class="btn btn-primary"
+                   href="@Url.Action("Create", "Trip")">
+                    Nuovo viaggio
+                </a>
+            </div>
+
+            @if (Model.Count() == 0)
+            {
+                    <h3 class="text-center">Non hai inserito nessun viaggio</h3>
+            }
+            else
+            {
+            <table class="table post-list-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Immagine</th>
+                        <th>Titolo</th>
+                        <th>Descrizione</th>
+                        <th>Categoria</th>
+                        <th>Azioni</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                @foreach (Trip trip in Model)
+                {
+                    <tr class="mb-3 py-5">
+                        <td>@trip.Id</td>
+                        <td class="image"><img src="@trip.Image"></td>
+                        <td class="title">@trip.Title</td>
+                        <td class="description">@trip.Description</td>
+                        <td class="category">@trip.Category.Name</td>
+                        <td class="items-buttons">
+                            <div class="buttons">
+                                        <a class="btn btn-info btn-sm" href="@Url.Action("Show", "Trip", new{Id = trip.Id})">Vedi</a> 
+                                <a class="btn btn-warning btn-sm" href="@Url.Action("Update", "Trip", new{Id = trip.Id})">Modifica</a>
+                                <form asp-controller="Trip" asp-action="Delete" asp-route-id="@trip.Id" method="post">
+                                @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        Elimina
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+                </tbody>
+            </table>
+            }
+        </div>
+    </div>
+</div>
+
 
 
