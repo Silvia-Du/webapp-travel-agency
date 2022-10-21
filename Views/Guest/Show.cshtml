@@ -3,41 +3,24 @@
 }
 
     <div class="jumbo-show debug"></div>
-    <div class="text-center main-section container py-4">
+    <div class="text-center main-section container py-4" >
       <h1 class="title mb-4">Scopri il viaggio</h1>
       <div class="action-btn">
-        <button type="button" class="btn btn-info">Action</button>
-        <button type="button" class="btn btn-info">Action</button>
-        <button type="button" class="btn btn-info">Action</button>
+        <button type="button" class="btn btn-dark">Action</button>
+        <a type="button" class="btn btn-dark mx-2" href="">Action</a>
+        <a type="button" class="btn btn-dark" href="@Url.Action("Home","Guest")">Torna alla lista</a>
       </div>
-      <div class="text-start px-md-5 pt-4 ">
-        <div class="d-flex align-items-center mb-3">
-
-          <h2 class="me-3">Nome del pacchetto</h2>
-          <h5 class="mb-0">Euri/ x pers</h5>
+      <div class="text-start px-md-5 pt-4 trip-box" id="@ViewData["id"]">
+        <div class="d-flex align-items-center mb-3 first-d">
+            @*frist inj*@
         </div>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque possimus ad fugit expedita esse eum laboriosam, perferendis dicta. Ex necessitatibus sed maiores excepturi corrupti, modi fuga, recusandae, accusantium exercitationem magnam velit laborum error quis ratione ad? Dolorem fugiat est quaerat quam quod! Ea aut impedit illo porro quae id pariatur.</p>
-        <div class="mt-4">
-          <div class="square-info d-inline-block py-3 text-center me-5">
-            <p class="mb-0">Prenotaz</p>
-          </div>
-          <div class="square-info d-inline-block py-3 text-center me-5">
-            <p class="mb-0">Range</p>
-          </div>
-          <div class="square-info d-inline-block py-3 text-center me-5">
-            <p class="mb-0">cat</p>
-          </div>
+        <div class="second-d">
+            @*second-inj*@
         </div>
         <div class="container-fluid mt-3">
           <div class="row">
-            <div class="col-10 col-lg-6 debug py-3">
-              <h3>Destinazione</h3>
-              <h4>partenza</h4>
-              <h4>rientro</h4>
-              <h3>incluso</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores nesciunt est perferendis corporis nam eveniet?</p>
-              <h3>incluso</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores nesciunt est perferendis corporis nam eveniet?</p>
+            <div class="col-10 col-lg-6 debug px-4 py-3 third-d">
+                @*third-inj*@
             </div>
             <div class="col-2 col-lg-6 debug py-3">
               <h3>Prenota</h3>
@@ -59,5 +42,53 @@
       </div>
 
     </div>
+
+    <script type="text/javascript">
+
+        //let id = window.location.pathname.split('/')[3];
+        let id = document.querySelector('.trip-box').id;
+
+        axios.get('/api/trip/show/' + id)
+        .then(res=>{
+            console.log(res.data)
+            console.log("ecccomi")
+            const trip = res.data;
+            document.querySelector('.first-d').innerHTML +=
+            `
+              <h2 class="me-3">${trip.title}</h2>
+              <h5 class="mb-0">${trip.price}/ x pers</h5>
+            `;
+            document.querySelector('.second-d').innerHTML +=
+            `
+                <p>${trip.description}</p>
+                <div class="mt-4">
+                    <div class="square-info d-inline-block py-3 text-center me-5">
+                        <p class="mb-0">N' Prenotaz</p>
+                    </div>
+                    <div class="square-info d-inline-block py-3 text-center me-5">
+                        <p class="mb-0">Età ${trip.ageRange.range} +</p>
+                    </div>
+                    <div class="square-info d-inline-block py-3 text-center me-5">
+                        <p class="mb-0">${trip.category.name}</p>
+                    </div>
+                </div>
+            `;
+            document.querySelector('.third-d').innerHTML +=
+            `
+                <h3>${trip.destination.name}</h3>
+                <h5>Partenza : ${trip.startDate}</h5>
+                <h5>Rientro : ${trip.endDate}</h5>
+                <h5>Giorni di viaggio : ${trip.daysNum}</h5>
+                <h3>incluso</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores nesciunt est perferendis corporis nam eveniet?</p>
+                <h3>incluso</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores nesciunt est perferendis corporis nam eveniet?</p>
+            `;
+        })
+        .catch(err=>{
+            console.log(err.message)
+        })
+
+    </script>
 
 

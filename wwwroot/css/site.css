@@ -111,8 +111,9 @@ footer {
 .main-section .square-info{
   background-color: rgb(238, 114, 69);
   color: white;
-  min-width: 120px;
+  min-width: 160px;
 }
+
 
 /*loader*/
 .lds-spinner {
