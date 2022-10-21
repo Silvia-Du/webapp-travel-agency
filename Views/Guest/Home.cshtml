@@ -37,6 +37,9 @@
       <div class="no-result row">
           <h3>Nessun risultato per questa ricerca</h3>
       </div>
+      <div class="my-loader d-flex justify-content-center mt-5 py-5">
+          <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      </div>
       <div class="row result">
         @*<div class="col-12 col-md-6 col-lg-3 debug">
           <div class="card">
@@ -80,16 +83,20 @@
 
                 console.log("response ok", res)
                 let itemsCollection = res.data;
-
+                
                 if(itemsCollection.lenght == 0 ){
-
-                    noResult();
+                   setTimeout(()=>{                   
+                   document.querySelector('.my-loader').classList.add('d-none');
+                   noResult();
+                   }, 2000 )
 
                 }else{
 
+                  setTimeout(()=>{
+                    document.querySelector('.my-loader').classList.add('d-none');
                     document.querySelector('.result').innerHTML = "";
-
                     getCards(itemsCollection);
+                  }, 2000 )
                 }
               
             })
