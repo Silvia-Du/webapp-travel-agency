@@ -18,6 +18,26 @@
                  <a class="btn_show px-3 py-2 rounded-pill" href="@Url.Action("Update", "Trip", new{Id = Model.Id})">Modifica</a>
                  <a class="btn_show px-3 py-2 rounded-pill" asp-area="" asp-controller="Trip" asp-action="Index">Lista Viaggi</a>
         </div>
+        <div class="container debug">
+            <div class="row">
+                @if (Model.Messages is null)
+                {
+                    <div class="debug py-5 px-3">
+                        <h5>Non ci sono messaggi per questo annuncio di viaggio</h5>                       
+                    </div>
+                    
+                }else{
+
+                    @foreach(Message message in Model.Messages){
+
+                        <div class="col-12 col-md-4 debug">
+                            <h5>@message.Title</h5>
+                            <p>@message.Text</p>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
     </div>
 </div>
 

@@ -43,7 +43,7 @@
                         <td class="category">@trip.Category.Name</td>
                         <td class="items-buttons">
                             <div class="buttons">
-                                        <a class="btn btn-info btn-sm" href="@Url.Action("Show", "Trip", new{Id = trip.Id})">Vedi</a> 
+                                <a class="btn btn-info btn-sm" href="@Url.Action("Show","Trip", new{Id = trip.Id})">Vedi</a> 
                                 <a class="btn btn-warning btn-sm" href="@Url.Action("Update", "Trip", new{Id = trip.Id})">Modifica</a>
                                 <form asp-controller="Trip" asp-action="Delete" asp-route-id="@trip.Id" method="post">
                                 @Html.AntiForgeryToken()

@@ -38,10 +38,10 @@ namespace webapp_travel_agency.Controllers.Api
 
 
         [HttpGet("{id}")]
-        public IActionResult Show(int id)
+        public IActionResult Details(int id)
         {
             //cercare la pizza e passarla alla vista
-            Trip trip = _ctx.Trips?.Include("Category").Include("AgeRange").Include("Destination").FirstOrDefault(p => p.Id == id)!;
+            Trip trip = _ctx.Trips?.Include("Category").Include("AgeRange").Include("Destination").Include("Messages").FirstOrDefault(p => p.Id == id)!;
 
             if (trip is null)
             {
