@@ -7,7 +7,7 @@
       <h1 class="title mb-4">Scopri il viaggio</h1>
       <div class="action-btn">
         <button type="button" class="btn btn-dark">Action</button>
-        <a type="button" class="btn btn-dark mx-2" href="">Action</a>
+        <a type="button" class="btn btn-dark mx-2" href="">Invia un messaggio</a>
         <a type="button" class="btn btn-dark" href="@Url.Action("Home","Guest")">Torna alla lista</a>
       </div>
       <div class="text-start px-md-5 pt-4 trip-box" id="@ViewData["id"]">
@@ -17,7 +17,7 @@
         <div class="second-d">
             @*second-inj*@
         </div>
-        <div class="container-fluid mt-3">
+        <div class="container-fluid mt-3 mb-5">
           <div class="row">
             <div class="col-10 col-lg-6 debug px-4 py-3 third-d">
                 @*third-inj*@
@@ -33,13 +33,17 @@
                   <input type="text" class=" mb-2 form-control searcher" >
                   <p class=" mb-0">codice fiscale</p>
                   <input type="text" class=" mb-2 form-control searcher" >
-                  <button type="button" class="btn btn-info align-self-end mt-3">Prenota</button>
+                  <button type="button" class="btn btn-orange align-self-end mt-3">Prenota</button>
 
               </div>
             </div>
           </div>
         </div>
+
       </div>
+      @*<partial name="_FormMessage" />*@
+    @Html.Partial("_FormMessage");
+
 
     </div>
 

@@ -108,11 +108,27 @@ footer {
   font-size: 3.2rem;
 }
 
-.main-section .square-info{
-  background-color: rgb(238, 114, 69);
-  color: white;
-  min-width: 160px;
+.main-section .square-info,
+.btn-orange {
+    background-color: rgb(238, 114, 69);
+    color: white;
+    min-width: 160px;
 }
+
+/*form message*/
+
+.message-box {
+    width: 900px;
+    margin: 0 auto;
+}
+
+
+
+.form-box {
+    /*    background-color: #EEB14C;*/
+    box-shadow: 4px 4px 19px -5px grey;
+}
+
 
 
 /*loader*/

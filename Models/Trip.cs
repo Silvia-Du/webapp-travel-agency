@@ -9,7 +9,6 @@ namespace webapp_travel_agency.Models
         [Key]
         public int Id { get; set; }
 
-        [Column("name")]
         [Required(ErrorMessage = "Il campo titolo è obbligatorio")]
         [StringLength(70, ErrorMessage = "Il campo nome non può avre piu di 70 caratteri")]
         public string? Title { get; set; }
@@ -52,6 +51,8 @@ namespace webapp_travel_agency.Models
         public AgeRange? AgeRange { get; set; }
 
         public List<Booking>? Bookings { get; set; }
+
+        public List<Message>? Messages { get; set; }
 
     }
 }

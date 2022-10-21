@@ -15,6 +15,7 @@ namespace webapp_travel_agency.Models
         public DbSet<TravelStage>? TravelStages { get; set; }
         public DbSet<Trip>? Trips { get; set; }
         public DbSet<Buyer>? Buyers { get; set; }
+        public DbSet<Message>? Messages { get; set; }
 
 
         public AgencyContext()

@@ -1,0 +1,109 @@
+﻿
+
+<div class="message-box py-5">
+      <form class="debug eccolo" >
+        <div class="form-box p-4 container">
+
+          @*output send*@
+          <div class="output-mex p-3 d-flex justify-content-between d-none text-center debug"></div>
+
+          <div class="row message-container ">
+          <h2>Invia un messaggio</h2>
+
+              <div class="col-12">
+                    @*titolo*@
+                <div class="mb-3 Title">
+                    <strong>Titolo:</strong>
+                    <input type="text" class="d-block w-100 input-c" id="Title"/>
+                    <span class="text-danger"></span>
+                </div>
+              </div>
+
+              <div class="col-12">
+                    @*testo*@
+                <div class="mb-3 Text">
+                    <strong>Messaggio:</strong>
+                    <textarea type="text" class="d-block w-100 input-c" rows="5" id="Text"></textarea>
+                    <span class="text-danger"></span>
+                </div>   
+              </div>
+
+              <div class="col-6">
+                    @*titolo*@
+                <div class="mb-3 Name">
+                    <strong>Nome:</strong>
+                    <input type="text" class="d-block w-100 input-c" id="Name" />
+                    <span class="text-danger"></span>
+                </div>
+              </div>
+
+              <div class="col-6">
+                    @*email*@
+                <div class="mb-3 Email">
+                    <strong>La tua email :</strong>
+                    <input type="text" class="d-block w-100 input-c" id="Email" />
+                    <span class="Email text-danger"></span>
+                </div>
+              </div>
+            </div>
+            <input onclick="sendMex()" class="btn btn-small  btn-orange" value="Invia">
+
+          </div>
+      </form>
+
+  </div>
+
+  <script type="text/javascript">
+      //email, name, text, title, tripid
+
+
+    function sendMex(){
+
+        axios.post('/api/trip/send',{
+            title: document.querySelector("#Title").value,
+            text: document.querySelector("#Text").value,
+            name: document.querySelector("#Name").value,
+            email: document.querySelector("#Email").value,
+            tripId: id
+
+        })
+        .then(r=>{
+
+            document.querySelector('.output-mex').classList.remove("d-none");
+        console.log(document.querySelector('.output-mex'));
+
+            document.querySelector('.output-mex').innerHTML +=
+            `<h3>${r.data.response}</h3>`;
+            //setTimeout(()=>{                   
+            //document.querySelector('.output-mex').classList.add('d-none');
+            //}, 3000 )
+            
+        })
+        .catch(e=>{
+            console.log(e);
+           const inputCollection = document.querySelectorAll('.input-c');
+           const eCollection = e.response.data.errors;
+           console.log(eCollection);
+           for( let array in eCollection){
+               const value = eCollection[array];
+                    console.log(array);
+
+               for(let text in value){
+                    console.log(value[text]);
+                    document.querySelector(`.${array}`).innerHTML+=
+                    `<span class="text-danger">${value[text]}; </span>`
+               }
+           }
+
+
+        })
+
+
+    }
+
+</script>
+
+
+
+
+

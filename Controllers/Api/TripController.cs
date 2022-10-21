@@ -50,5 +50,13 @@ namespace webapp_travel_agency.Controllers.Api
 
             return Ok(trip);
         }
+
+        [HttpPost]
+        public IActionResult Send([FromBody] Message message)
+        {
+            _ctx.Messages?.Add(message);
+            _ctx.SaveChanges();
+            return Ok(new { response = "Messaggio inviato correttamente" });
+        }
     }
 }
