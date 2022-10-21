@@ -8,14 +8,14 @@
 
         @*crea*@
         <div class="col-12">
-            <h3>Crea nuova destinazione:</h3>
-            <form asp-controller="Destination" asp-action="Create" method="post">
+            <h3>Aggiungi un nuovo range:</h3>
+            <form asp-controller="AgeRange" asp-action="Create" method="post">
                 @Html.AntiForgeryToken()
 
                 <div class="mb-3">
-                    <strong>Nome destinazione:</strong>
-                    <input asp-for="Destination.Name" class="d-block w-100" />
-                    <span asp-validation-for="Destination.Name" class="text-danger"></span>
+                    <strong>Range:</strong>
+                    <input asp-for="AgeRange.Range" class="d-block w-100" />
+                    <span asp-validation-for="AgeRange.Range" class="text-danger"></span>
                 </div>
 
                 <div class="text-end">
@@ -31,9 +31,9 @@
                 <h1 class="mt-3 mb-3">Lista Destinazioni</h1>
             </div>
 
-            @if (Model.Destinations.Count() == 0)
+            @if (Model.Ranges.Count() == 0)
             {
-                    <h3 class="text-center">Non hai inserito nessua destinazione</h3>
+                <h3 class="text-center">Non hai inserito nessun range</h3>
             }
             else
             {
@@ -41,22 +41,22 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Nome</th>
+                        <th>Range</th>
                         <th>Azioni</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                @foreach (Destination destination in Model.Destinations)
+                @foreach (AgeRange range in Model.Ranges)
                 {
                     <tr class="mb-3 py-5">
-                        <td>@destination.Id</td>                       
-                        <td class="title">@destination.Name</td>
+                        <td>@range.Id</td>                       
+                        <td class="title">@range.Range</td>
                        
                         <td class="items-buttons">
                             <div class="buttons">
-                                <a class="btn btn-warning btn-sm" href="@Url.Action("Update", "Destination", new{Id = destination.Id})">Modifica</a>
-                                <form asp-controller="Destination" asp-action="Delete" asp-route-id="@destination.Id" method="post">
+                                <a class="btn btn-warning btn-sm" href="@Url.Action("Update", "AgeRange", new{Id = range.Id})">Modifica</a>
+                                <form asp-controller="AgeRange" asp-action="Delete" asp-route-id="@range.Id" method="post">
                                 @Html.AntiForgeryToken()
                                     <button type="submit" class="btn btn-danger btn-sm">
                                         Elimina
@@ -65,6 +65,7 @@
                             </div>
                         </td>
                     </tr>
+                    
                 }
 
                 </tbody>

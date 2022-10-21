@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient.Server;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -6,6 +7,7 @@ using webapp_travel_agency.Models;
 
 namespace webapp_travel_agency.Controllers
 {
+    [Authorize]
     public class TripController : Controller
     {
         readonly AgencyContext _ctx = new();

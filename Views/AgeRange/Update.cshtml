@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Update Page";
+}
+@model AgeRange
+
+<div class="container bg-beige debug p-4">
+
+    <div class="col-12">
+        <h3>Modifica: @Model.Range</h3>
+        <form asp-controller="AgeRange" asp-action="Update" asp-route-id="@Model.Id" method="post">
+        @Html.AntiForgeryToken()
+
+            <div class="mb-3">
+            <strong>Range d'età:</strong>
+            <input asp-for="@Model.Range" class="d-block w-100" />
+            <span asp-validation-for="@Model.Range" class="text-danger"></span>
+            </div>
+
+            <div class="text-end">
+            <input type="submit" class="btn btn-small  btn-secondary" value="Salva">
+            </div>
+        </form>
+    </div>
+</div>
+

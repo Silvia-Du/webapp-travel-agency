@@ -7,7 +7,7 @@ namespace webapp_travel_agency.Controllers
     public class GuestController : Controller
     {
 
-        public IActionResult Index()
+        public IActionResult Home()
         {
             return View();
         }

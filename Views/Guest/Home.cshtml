@@ -1,0 +1,162 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_LayoutGuest";
+}
+
+    <div class="jumbotron">
+
+      <div class="container-fluid jumbo-md">
+        <div class="row flex-wrap-reverse px-0">
+          <div class="col-12 col-lg-5 text-center text-col">
+            <p class="mb-0 text-uppercase mt-5">Lorem ipsum dolor ist</p>
+            <h2 class="mb-3">5 ways to make most beautifool your trip</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, eum adipisci reiciendis earum dolorem aliquam deleniti ducimus alias saepe, minus natus molestias facere ipsum quaerat corrupti, esse sit eveniet eligendi.</p>
+          </div>
+          <div class="col-12 col-lg-7 position-relative">
+            <img class="jumbo-img" src="./img/baked.png" alt="paesaggio">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="container-fluid research debug d-none d-lg-block">
+      <div class="row">
+        <div class="col-12 col-lg-5 debug d-flex align-items-center flex-column">
+
+          <p class="text-uppercase mb-0">Dove vuoi andare?</p>
+          <input type="text" class="form-control searcher" >
+        </div>
+      </div>
+    </div>
+    <div class="research-small d-lg-none">
+      <p class="text-uppercase mb-0">Dove vuoi andare?</p>
+      <input type="text" class="form-control searcher">
+    </div>
+    <div class="container-fluid card-container mt-5">
+      <div class="no-result row">
+          <h3>Nessun risultato per questa ricerca</h3>
+      </div>
+      <div class="row result">
+        @*<div class="col-12 col-md-6 col-lg-3 debug">
+          <div class="card">
+            <img src="./img/card-img.png" class="card-img-top" alt="card-img">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>*@
+
+      </div>
+    </div>
+
+     <script type="text/javascript">
+
+        getTravels("");
+
+        document.querySelector('.no-result').classList.add('d-none');
+        document.querySelector(".searcher").addEventListener('keyup',searchTrip);
+
+
+        function searchTrip(){
+
+            let userString = this.value;
+            getTravels(userString);
+            //implementare timing function 
+
+        }
+
+
+        function getTravels(string){
+
+            axios.get('/api/trip/get',{
+                params:{
+                    title: string
+                }
+            })
+            .then(res=>{
+
+                console.log("response ok", res)
+                let itemsCollection = res.data;
+
+                if(itemsCollection.lenght == 0 ){
+
+                    noResult();
+
+                }else{
+
+                    document.querySelector('.result').innerHTML = "";
+
+                    getCards(itemsCollection);
+                }
+              
+            })
+            .catch(err=>{
+                console.log(err);
+                
+            })
+
+        }
+
+        //stampa se la ricerca è senza risultati
+        function noResult(){
+
+            document.querySelector('.no-result').classList.remove('d-none');
+            document.querySelector('.result').classList.add('d-none');
+        }
+
+        //stampa la collection di card nell'html
+        function getCards(collection){
+
+            collection.forEach(trip => {              
+
+                document.querySelector('.result').innerHTML +=
+                `
+                <div class="col-12 col-md-6 col-lg-3 debug">
+                    <div class="card">
+                        <img src="${trip.image}" class="card-img-top" alt="${trip.title}">
+                        <div class="card-body">
+                            <h5 class="card-title">${trip.title}</h5>
+                            <p class="card-text">${trip.description}</p>
+                            <a href="#" class="btn btn-primary">View More</a>
+                        </div>
+                    </div>
+                </div>
+                `;
+
+            });
+        }
+        //function deletePizza(id){
+        //    axios.delete('/api/pizza/delete/'+id)
+        //    .then(r=>{
+        //        console.log(r.data.response);
+        //        const output = document.querySelector('.user-output');
+        //        output.classList.add('alert-success');
+        //        output.classList.remove('d-none');
+
+        //        let hide = false;
+        //        output.innerHTML+=
+        //        `<h3>${r.data.response}</h3>
+        //        `;
+        //        getTravels("");
+        //    })
+        //    .catch(e=>{
+        //        console.log(e.data.response);
+        //    })
+        //}
+        //function hideBlock(){
+        //     document.querySelector('.user-output').classList.add('d-none');
+
+        //}
+
+
+
+
+    </script>
+
+
+
+
+

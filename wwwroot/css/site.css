@@ -16,3 +16,72 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/* home guest*/
+.debug {
+    background-color: rgba(95, 158, 160, 0.685);
+    border: 1px solid cadetblue;
+}
+
+header, footer {
+    height: 100px;
+}
+
+.main {
+    min-height: calc(100vh - 200px);
+    position: relative;
+}
+
+.jumbotron {
+    background-color: #ebeae4;
+}
+
+.jumbo-img {
+    width: 98%;
+    position: absolute;
+}
+
+.jumbo-md {
+    padding: 0 250px;
+    min-height: 460px;
+}
+
+.text-col {
+    padding-top: 87px;
+}
+
+.research, .card-container {
+    padding: 0 250px;
+}
+
+    .card-container img {
+        width: 100%;
+        min-height: 50px;
+    }
+
+
+/* //media */
+
+@media screen and (max-width: 992px) {
+
+    .jumbotron {
+        background-color: #ffffff;
+    }
+
+    .jumbo-img {
+        width: 100%;
+        position: static;
+    }
+
+    .jumbo-md {
+        padding: 15px;
+    }
+
+    .research, .card-container {
+        padding: 0;
+    }
+
+    .text-col {
+        padding-top: 0;
+    }
+}

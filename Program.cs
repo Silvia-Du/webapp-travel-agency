@@ -1,7 +1,22 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
+using webapp_travel_agency.Models;
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("AgencyContextConnection") ?? throw new InvalidOperationException("Connection string 'AgencyContextConnection' not found.");
+
+builder.Services.AddDbContext<AgencyContext>(options =>
+    options.UseSqlServer(connectionString));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<AgencyContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddControllers().AddJsonOptions(x =>
+            x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+//[JsonIgnore]
+
 
 var app = builder.Build();
 
@@ -18,10 +33,14 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Trip}/{action=Index}/{id?}");
+    pattern: "{controller=Guest}/{action=Home}/{id?}");
+
+app.MapRazorPages();
 
 app.Run();

@@ -8,14 +8,14 @@ using webapp_travel_agency.Models;
 namespace webapp_travel_agency.Controllers
 {
     [Authorize]
-    public class DestinationController : Controller
+    public class AgeRangeController : Controller
     {
         readonly AgencyContext _ctx = new();
-
+       
         public IActionResult Index()
         {
             DettailsUtility utility = new();
-            utility.Destinations = _ctx.Destinations?.ToList()!;
+            utility.Ranges = _ctx.AgeRanges?.ToList()!;
             return View(utility);
         }
 
@@ -26,12 +26,16 @@ namespace webapp_travel_agency.Controllers
         {
             if (!ModelState.IsValid)
             {
-                utilityClass.Destinations = _ctx.Destinations?.OrderBy(x => x.Id).ToList()!;
+                utilityClass.Ranges = _ctx.AgeRanges?.OrderBy(x => x.Id).ToList()!;
 
                 return View(utilityClass);
             }
+            if (utilityClass.Ranges is null)
+            {
+                return NotFound("Non è stata trovata nessuna corrispondenza");
+            }
 
-            _ctx.Destinations?.Add(utilityClass.Destination);
+            _ctx.AgeRanges?.Add(utilityClass.AgeRange);
             _ctx.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
@@ -39,35 +43,34 @@ namespace webapp_travel_agency.Controllers
         public IActionResult Update(int id)
         {
 
-            Destination? destination = _ctx.Destinations?.FirstOrDefault(x => x.Id == id);
+            AgeRange? range = _ctx.AgeRanges?.FirstOrDefault(x => x.Id == id);
 
-            if (destination is null)
+            if (range is null)
             {
                 return NotFound("Non è stata trovata nessuna corrispondenza");
             }
 
-            return View(destination);
+            return View(range);
         }
 
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Update(int id, Destination formDestination)
+        public IActionResult Update(int id, AgeRange formRange)
         {
-            formDestination.Id = id;
+            formRange.Id = id;
 
 
             if (!ModelState.IsValid)
             {
-                return View(formDestination);
+                return View(formRange);
             }
 
-            Destination destination = _ctx.Destinations?
-                .FirstOrDefault(x => x.Id == id)!;
+            AgeRange? range = _ctx.AgeRanges?.FirstOrDefault(x => x.Id == id);
 
-            destination.Name = formDestination.Name;
-            _ctx.Destinations?.Update(destination);
+            range.Range = formRange.Range;
+            _ctx.AgeRanges?.Update(range);
             _ctx.SaveChanges();
 
             return RedirectToAction(nameof(Index));
@@ -79,15 +82,15 @@ namespace webapp_travel_agency.Controllers
         public IActionResult Delete(int id)
         {
 
-            Destination? destination = _ctx.Destinations?.FirstOrDefault(x => x.Id == id);
+            AgeRange? range = _ctx.AgeRanges?.FirstOrDefault(x => x.Id == id);
 
-            if (destination is null)
+            if (range is null)
             {
                 return NotFound("Non è stata trovata nessuna corrispondenza");
             }
             else
             {
-                _ctx.Destinations?.Remove(destination);
+                _ctx.AgeRanges?.Remove(range);
                 _ctx.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
