@@ -23,8 +23,8 @@ body {
     border: 1px solid cadetblue;
 }
 
-header, footer {
-    height: 100px;
+footer {
+    height: 80px;
 }
 
 .main {
@@ -54,10 +54,15 @@ header, footer {
     padding: 0 250px;
 }
 
-    .card-container img {
-        width: 100%;
-        min-height: 50px;
-    }
+.card-container img {
+    width: 100%;
+    min-height: 50px;
+}
+
+.card-container a {
+    color: black;
+    text-decoration: none;
+}
 
 
 /* //media */
@@ -84,6 +89,29 @@ header, footer {
     .text-col {
         padding-top: 0;
     }
+}
+
+
+/*show guest*/
+
+.jumbo-show{
+  background-image: url(/img/show-jumbo.png);
+  background-position: center;
+  background-size: cover;
+  height: 350px;
+}
+.main-section{
+  margin-top: -50px;
+  background-color: #ebeae4;
+}
+.main-section .title{
+  font-size: 3.2rem;
+}
+
+.main-section .square-info{
+  background-color: rgb(238, 114, 69);
+  color: white;
+  min-width: 120px;
 }
 
 /*loader*/

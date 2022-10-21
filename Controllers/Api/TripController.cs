@@ -35,5 +35,20 @@ namespace webapp_travel_agency.Controllers.Api
             return Ok(trips);
 
         }
+
+
+        [HttpGet("{id}")]
+        public IActionResult Show(int id)
+        {
+            //cercare la pizza e passarla alla vista
+            Trip trip = _ctx.Trips?.Include("Category").Include("AgeRange").Include("Destination").FirstOrDefault(p => p.Id == id)!;
+
+            if (trip is null)
+            {
+                return NotFound(new { response = "Non è stata trovata nessuna corrispondenza" });
+            }
+
+            return Ok(trip);
+        }
     }
 }

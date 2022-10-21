@@ -12,8 +12,9 @@ namespace webapp_travel_agency.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Show(int id)
         {
+            ViewData["id"] = id;
             return View();
         }
 

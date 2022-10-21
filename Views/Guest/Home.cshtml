@@ -41,6 +41,8 @@
           <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
       </div>
       <div class="row result">
+          <a href="/Home/Show/${pizza.id}">
+            </a>
         @*qui injection card*@
 
       </div>
@@ -111,16 +113,18 @@
 
                 document.querySelector('.result').innerHTML +=
                 `
-                <div class="col-12 col-md-6 col-lg-3 debug">
-                    <div class="card">
-                        <img src="${trip.image}" class="card-img-top" alt="${trip.title}">
-                        <div class="card-body">
-                            <h5 class="card-title">${trip.title}</h5>
-                            <p class="card-text">${trip.description}</p>
-                            <a href="#" class="btn btn-primary">View More</a>
+                    <div class="col-12 col-md-6 col-lg-3 debug">
+                    <a href="/Guest/Show/${trip.id}" class="">            
+                        <div class="card">
+                            <img src="${trip.image}" class="card-img-top" alt="${trip.title}">
+                            <div class="card-body">
+                                <h5 class="card-title">${trip.title}</h5>
+                                <p class="card-text">${trip.description}</p>
+                                <a href="#" class="btn btn-primary">View More</a>
+                            </div>
                         </div>
+                     </a>
                     </div>
-                </div>
                 `;
 
             });
